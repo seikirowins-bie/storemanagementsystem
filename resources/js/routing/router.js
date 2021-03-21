@@ -1,5 +1,6 @@
 // components
 import CreditorPage from './../components/creditor/index'
+import InventoryPage from './../components/inventory/index'
 //end of components
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -11,6 +12,11 @@ const router = new VueRouter({
             path:'/',
             name:'creditor-page',
             component:CreditorPage
+        },
+        {
+            path:'/inventory',
+            name:'inventory-page',
+            component:InventoryPage
         }
     ]
 });

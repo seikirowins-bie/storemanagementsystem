@@ -1,6 +1,5 @@
 <template>
-    <div class="container-fluid">
-        <div class="row">
+  
             <div class="col-lg-3">
                 <div  id="transaction-component" class="card">
                     <div class="card-body">
@@ -8,8 +7,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+       
 </template>
 <script>
 import Transaction from './transaction';
