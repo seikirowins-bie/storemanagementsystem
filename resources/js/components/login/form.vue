@@ -31,6 +31,9 @@
       <div v-if="!isCredentialsValid" class="form-group">
         <p class="error-text">Username or Password is incorrect!</p>
       </div>
+      <div v-if="isAuth != ''">
+        <p class="text-white">yes authenticated</p>
+      </div>
     </form>
   </div>
 </template>
@@ -47,12 +50,42 @@ export default {
   },
   methods: {
     InitiateAuthentication() {
-      Auth.commit("Authenticate", this.credentials);
+      axios
+        .get("/sanctum/csrf-cookie")
+        .then((response) => {
+          axios
+            .post("/api/authenticate", this.credentials)
+            .then((response) => {
+              if (response.status == 200) {
+                let res = response.data;
+
+                Auth.commit(
+                  "setToken",
+                  localStorage.setItem("authentication-token", res.access_token)
+                );
+              }
+            })
+            .catch((error) => {
+              if (error.request.status == 422) {
+                Auth.commit("setValidityStatus", false);
+              }
+              return Promise.reject(error);
+            });
+        })
+        .catch((error) => {
+          return Promise.reject(error);
+        });
     },
+  },
+  mounted() {
+    console.log(localStorage.getItem("authentication-token"));
   },
   computed: {
     isCredentialsValid() {
       return Auth.getters.checkIfValid;
+    },
+    isAuth() {
+      return Auth.getters.isAuthenticated;
     },
   },
 };

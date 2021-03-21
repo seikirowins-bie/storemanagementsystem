@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+
+use App\Models\User;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -38,8 +42,34 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function Sign_in(Request $request)
+    {
+        $credentials = [
+            'username'=>$request['username'],
+            'password'=>$request['password']
+        ];
+        $status = null;
+        $authenticationToken = null;
+        if(Auth::attempt($credentials))
+        {
+            $user = User::where('username',$credentials['username'])->first();
+            $authenticationToken = $user->createToken('authToken')->plainTextToken;
+            $status = 200;
+        } else {
+            $status = 422;
+        }
+
+        return Response()->json([
+            
+            'access_token'=>$authenticationToken,
+            'token_type'=>'Bearer'
+        ],$status);
+
+    }
+
+
     public function username()
-{
-    return 'username';
-}
+    {
+        return 'username';
+    }
 }
