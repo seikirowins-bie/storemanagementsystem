@@ -15,6 +15,7 @@ class CreateAccountManagementTable extends Migration
     {
         Schema::create('account_management', function (Blueprint $table) {
             $table->id();
+            $table->string('status');
             $table->timestamps();
         });
 
