@@ -1,6 +1,6 @@
 <template>
   
-            <div class="col-lg-3">
+            <div class="col-lg-6">
                 <div  id="transaction-component" class="card">
                     <div class="card-body">
                           <Transaction />

@@ -20,7 +20,15 @@ const router = new VueRouter({
             path:'/',
             name:'login-page',
             component:LoginPage,
-           
+            beforeEnter: ((to,from,next)=>{
+                if(Auth.getters.isAuthenticated)
+                {
+                    next({
+                        name:'creditor-page'
+                    });
+                }
+                next();
+            })
         },
         {
             path:'/creditors',
@@ -42,8 +50,11 @@ const router = new VueRouter({
 });
 
 
+
+// navigation guard, redirect unauthenticated user to the login page
 router.beforeEach((to,from,next)=>{
-    if(to.matched.some(record => record.meta.requiresAuth))
+    // if(to.matched.some((record => record.meta.requiresAuth)))
+    if(to.meta.requiresAuth)
     {
         if(!Auth.getters.isAuthenticated)
         {

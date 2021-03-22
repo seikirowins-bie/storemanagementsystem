@@ -2,7 +2,7 @@
   <div id="login-form">
     <div class="">
       <h3 class="text-white">
-        <i class="fas fa-store-alt"></i> Store Management System
+        <i class="fas fa-store-alt"></i> {{isAuth}} Store Management System
       </h3>
       <hr />
     </div>
@@ -31,9 +31,7 @@
       <div v-if="!isCredentialsValid" class="form-group">
         <p class="error-text">Username or Password is incorrect!</p>
       </div>
-      <div v-if="isAuth != ''">
-        <p class="text-white">yes authenticated</p>
-      </div>
+      <p v-if="isAuth" class="text-white">Authenticated</p>
     </form>
   </div>
 </template>
@@ -50,35 +48,46 @@ export default {
   },
   methods: {
     InitiateAuthentication() {
-      axios
-        .get("/sanctum/csrf-cookie")
-        .then((response) => {
-          axios
-            .post("/api/authenticate", this.credentials)
-            .then((response) => {
-              if (response.status == 200) {
-                let res = response.data;
+      // axios
+      //   .get("/sanctum/csrf-cookie")
+      //   .then((response) => {
+      //     axios
+      //       .post("/api/authenticate", this.credentials)
+      //       .then((response) => {
+      //         if (response.status == 200) {
+      //           let res = response.data;
 
-                Auth.commit(
-                  "setToken",
-                  localStorage.setItem("authentication-token", res.access_token)
-                );
-              }
-            })
-            .catch((error) => {
-              if (error.request.status == 422) {
-                Auth.commit("setValidityStatus", false);
-              }
-              return Promise.reject(error);
-            });
-        })
-        .catch((error) => {
-          return Promise.reject(error);
-        });
+      //           Auth.dispatch(
+      //             "Authenticate",
+      //             localStorage.setItem("authentication-token", res.access_token)
+      //           );
+      //             console.log(this.isAuth);
+      //             this.$router.push({
+      //               name:'creditor-page'
+      //             });
+                
+      //         }
+      //       })
+      //       .catch((error) => {
+      //         const err = error.request;
+      //        if(err)
+      //        {
+      //           if (err.status == 422) {
+      //           Auth.commit("setValidityStatus", false);
+      //         }
+      //         return Promise.reject(error);
+      //        }
+      //       });
+      //   })
+      //   .catch((error) => {
+      //     return Promise.reject(error);
+      //   });
+      Auth.dispatch('Authenticate',this.credentials);
+     
     },
   },
   mounted() {
-    console.log(localStorage.getItem("authentication-token"));
+    
   },
   computed: {
     isCredentialsValid() {
