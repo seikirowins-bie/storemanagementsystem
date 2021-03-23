@@ -59,8 +59,6 @@ const Auth = new Vuex.Store({
                             router.push({
                                 name: "creditor-page"
                             });
-
-                           
                         })
                         .catch(error => {
                             const err = error.request;

@@ -1,6 +1,6 @@
 <template>
   
-            <div class="col-lg-6">
+            <div class="col-lg-3">
                 <div  id="transaction-component" class="card">
                     <div class="card-body">
                           <Transaction />
@@ -26,4 +26,5 @@ export default {
     float: left;
     height: 100vh;
 }
+
 </style>

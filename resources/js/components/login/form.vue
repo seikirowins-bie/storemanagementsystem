@@ -1,7 +1,7 @@
 <template>
   <div id="login-form">
     <div class="">
-      <h3 class="text-white">
+      <h3 class="">
         <i class="fas fa-store-alt"></i> Store Management System
       </h3>
       <hr />
@@ -31,7 +31,7 @@
       <div v-if="!isCredentialsValid" class="form-group">
         <p class="error-text">Username or Password is incorrect!</p>
       </div>
-      <p v-if="isAuth" class="text-white">Authenticated</p>
+      
     </form>
   </div>
 </template>
