@@ -48,42 +48,7 @@ export default {
   },
   methods: {
     InitiateAuthentication() {
-      // axios
-      //   .get("/sanctum/csrf-cookie")
-      //   .then((response) => {
-      //     axios
-      //       .post("/api/authenticate", this.credentials)
-      //       .then((response) => {
-      //         if (response.status == 200) {
-      //           let res = response.data;
-
-      //           Auth.dispatch(
-      //             "Authenticate",
-      //             localStorage.setItem("authentication-token", res.access_token)
-      //           );
-      //             console.log(this.isAuth);
-      //             this.$router.push({
-      //               name:'creditor-page'
-      //             });
-
-      //         }
-      //       })
-      //       .catch((error) => {
-      //         const err = error.request;
-      //        if(err)
-      //        {
-      //           if (err.status == 422) {
-      //           Auth.commit("setValidityStatus", false);
-      //         }
-      //         return Promise.reject(error);
-      //        }
-      //       });
-      //   })
-      //   .catch((error) => {
-      //     return Promise.reject(error);
-      //   });
       Auth.dispatch("Authenticate", this.credentials);
-     
     },
   },
   mounted() {},
