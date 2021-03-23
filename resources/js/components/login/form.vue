@@ -2,7 +2,7 @@
   <div id="login-form">
     <div class="">
       <h3 class="text-white">
-        <i class="fas fa-store-alt"></i> {{isAuth}} Store Management System
+        <i class="fas fa-store-alt"></i> Store Management System
       </h3>
       <hr />
     </div>
@@ -65,7 +65,7 @@ export default {
       //             this.$router.push({
       //               name:'creditor-page'
       //             });
-                
+
       //         }
       //       })
       //       .catch((error) => {
@@ -82,13 +82,11 @@ export default {
       //   .catch((error) => {
       //     return Promise.reject(error);
       //   });
-      Auth.dispatch('Authenticate',this.credentials);
+      Auth.dispatch("Authenticate", this.credentials);
      
     },
   },
-  mounted() {
-    
-  },
+  mounted() {},
   computed: {
     isCredentialsValid() {
       return Auth.getters.checkIfValid;
