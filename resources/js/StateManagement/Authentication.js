@@ -6,34 +6,23 @@ Vue.use(Vuex);
 
 const Auth = new Vuex.Store({
     state:{
-        token:localStorage.getItem('authentication-token'),
-        isAuthenticated:localStorage.getItem('verify-authentication'),
+        token:localStorage.getItem('authentication-token') || '',
         isValid:true
     },
     getters:{
         checkIfValid: state => {
             return state.isValid;
+        },
+        isAuthenticated: state => {
+            return state.token;
         }
     },
     mutations:{
-        Authenticate: (state,credentials) => {
-            axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.post('/login',credentials).then(response => {
-
-                    
-
-                }).catch(error => {
-                   if(error.request.status == 422)
-                   {
-                       state.isValid = false;
-                   }
-                    return Promise.reject(error);
-                });
-            }).catch(error => {
-                
-                return Promise.reject(error);
-            });
-            
+        setToken: (state,token) => {
+            state.token = token;   
+        },
+        setValidityStatus: (state,status) => {
+            state.isValid = status;
         }
     }
 });
