@@ -1,5 +1,5 @@
 require('./bootstrap');
-
+require('popper.js');
 import Vue from 'vue';
 import App from './components/App';
 import router from './routing/router';

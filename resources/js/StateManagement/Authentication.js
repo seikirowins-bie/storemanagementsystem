@@ -55,9 +55,9 @@ const Auth = new Vuex.Store({
                                 "setLoggedInStatus",
                                 localStorage.getItem("verify-authentication")
                             );
-                            console.log("hahaha");
+                         
                             router.push({
-                                name: "creditor-page"
+                                name: "dashboard-page"
                             });
                         })
                         .catch(error => {

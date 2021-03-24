@@ -8,6 +8,11 @@ h1,h2,h3,h4,h5,h6
     font-weight: bolder;
 }
 
+h1,h2,h3,h4,h5,h6,p,span,i
+{
+    line-height: 130%;
+}
+
 
 /* form elements */
 .input-grey {
@@ -20,3 +25,12 @@ h1,h2,h3,h4,h5,h6
     border-bottom-left-radius: 200px;
     border-bottom-right-radius: 200px;
 }
+
+
+
+
+ // toolkit
+ .ti
+ {
+     cursor: pointer;
+ }

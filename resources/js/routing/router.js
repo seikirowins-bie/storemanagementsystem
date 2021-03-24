@@ -2,6 +2,7 @@
 import CreditorPage from './../components/creditor/index'
 import InventoryPage from './../components/inventory/index'
 import LoginPage from './../components/login/index'
+import DashboardPage from './../components/dashboard/index'
 //end of components
 
 //state management
@@ -24,11 +25,19 @@ const router = new VueRouter({
                 if(Auth.getters.isAuthenticated)
                 {
                     next({
-                        name:'creditor-page'
+                        name:'dashboard-page'
                     });
                 }
                 next();
             })
+        },
+        {
+            path:'/dashboard',
+            name:'dashboard-page',
+            component:DashboardPage,
+            meta:{
+                requiresAuth:true
+            }
         },
         {
             path:'/creditors',
