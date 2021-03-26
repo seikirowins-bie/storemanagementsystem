@@ -1,7 +1,7 @@
 import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
-import router from '../routing/router';
+import router from "../routing/router";
 
 Vue.use(Vuex);
 
@@ -39,6 +39,9 @@ const Auth = new Vuex.Store({
                         .post("/api/authenticate", credentials)
                         .then(response => {
                             let res = response.data;
+
+                           
+
                             // set data to the local storage
                             localStorage.setItem(
                                 "authentication-token",
@@ -55,7 +58,7 @@ const Auth = new Vuex.Store({
                                 "setLoggedInStatus",
                                 localStorage.getItem("verify-authentication")
                             );
-                         
+
                             router.push({
                                 name: "dashboard-page"
                             });
@@ -73,6 +76,33 @@ const Auth = new Vuex.Store({
                 .catch(error => {
                     return Promise.reject(error);
                 });
+        },
+        signOut({ commit,state }) {
+            
+                axios
+                    .post("api/sign-out",{
+                        tokenid:state.token
+                    })
+                    .then(response => {
+                        if (response) {
+                            console.log(response);
+                            if (response.status == 200) {
+                                localStorage.clear();
+                                commit("setToken", null);
+
+                                commit("setLoggedInStatus", false);
+
+                                router.push({
+                                    name: "login-page"
+                                });
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        return Promise.reject(error);
+                    });
+                
+            
         }
     }
 });

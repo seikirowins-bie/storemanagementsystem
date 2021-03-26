@@ -19,4 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('authenticate',[App\Http\Controllers\Auth\LoginController::class,'Sign_insds']);
+Route::post('authenticate',[App\Http\Controllers\Auth\LoginController::class,'Sign_in']);
+Route::post('sign-out',[App\Http\Controllers\Auth\LoginController::class,'logout']);
+
+Auth::routes();

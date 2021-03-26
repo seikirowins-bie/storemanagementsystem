@@ -62,9 +62,26 @@ class LoginController extends Controller
         return Response()->json([
             
             'access_token'=>$authenticationToken,
-            'token_type'=>'Bearer'
+            'token_type'=>'Bearer',
+           
         ],$status);
 
+    }
+
+    public function logout(Request $request)
+    {
+        $http_code = 500;
+        if(Auth::check())
+        {
+            Auth()->user()->tokens()->where('id', $request['tokenid'])->delete();
+            Auth::logout();
+            $http_code = 200;
+        } else {
+            $http_code = 401;
+        }
+        return Response()->json([
+             ],$http_code);
+       
     }
 
 

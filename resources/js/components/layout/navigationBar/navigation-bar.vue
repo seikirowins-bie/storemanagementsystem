@@ -19,7 +19,9 @@
                           <b-nav-item href="#">
                             <NotificationToolkit />
                           </b-nav-item>
-                             <b-nav-item href="#"><i class="far fa-user-circle"></i></b-nav-item>
+                             <b-nav-item href="#">
+                               <UserToolki />
+                             </b-nav-item>
               </b-navbar-nav>
 
 
@@ -28,9 +30,11 @@
 </template>
 <script>
 import NotificationToolkit from '../../toolkit/notification/notification';
+import UserToolki from '../../toolkit/user/user-card';
 export default {
   components:{
-    NotificationToolkit
+    NotificationToolkit,
+    UserToolki
   }
 };
 </script>

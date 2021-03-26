@@ -17130,4 +17130,8 @@ i {
   cursor: pointer;
 }
 
+.dropdown-menu {
+  border-width: 0px;
+}
+
 
