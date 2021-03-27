@@ -12,6 +12,9 @@ const Registration = new Vuex.Store({
     getters:{
         getUserInformation: state => {
             return state.UserInformation;
+        },
+        isRegistered: state => {
+            return state.isCreated;
         }
     },
     mutations:{
@@ -31,8 +34,10 @@ const Registration = new Vuex.Store({
                 if(res.status == 200)
                 {   
                     commit('checkIfCreated',true);
+                   
                 }
             }).catch(error => {
+                commit('checkIfCreated',false);
                 return Promise.reject(error);
             });
         }

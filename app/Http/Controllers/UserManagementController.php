@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use Hash;
 class UserManagementController extends Controller
 {
@@ -22,4 +23,11 @@ class UserManagementController extends Controller
 
         return Response()->json($user);
     }
+
+
+    public function getRoles()
+    {
+        return Response()->json(Role::all());
+    }
+
 }

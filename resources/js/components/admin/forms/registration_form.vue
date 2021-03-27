@@ -20,7 +20,12 @@
                 />
             </div>
             <div class="form-group">
-                <input type="text" v-model="user.email" class="form-control" placeholder="email" />
+                <input
+                    type="text"
+                    v-model="user.email"
+                    class="form-control"
+                    placeholder="email"
+                />
             </div>
             <div class="form-group">
                 <input
@@ -31,8 +36,18 @@
                 />
             </div>
             <div class="form-group">
-                <select v-model="user.role_id" class="form-control">
+                <select
+                    v-if="role_list"
+                    v-model="user.role_id"
+                    class="form-control"
+                >
                     <option value="">Select Role</option>
+                    <option
+                        v-for="role in role_list"
+                        :key="role.id"
+                        :value="role.id"
+                        >{{ role.role_name }}</option
+                    >
                 </select>
             </div>
             <div class="form-group text-right">
@@ -45,7 +60,7 @@
     </div>
 </template>
 <script>
-import Registration from '../../../StateManagement/Registration';
+import Registration from "../../../StateManagement/Registration";
 export default {
     data() {
         return {
@@ -53,7 +68,7 @@ export default {
                 first_name: null,
                 last_name: null,
                 email: null,
-                username:null,
+                username: null,
                 phone_no: null,
                 role_id: null
             },
@@ -61,16 +76,51 @@ export default {
         };
     },
     methods: {
-        createAccount()
-        {
-            this.user.username = this.user.first_name+"."+this.user.last_name + Math.floor(Math.random() * 99);
-            Registration.dispatch('createAccount',this.user);
+        createAccount() {
+            this.user.username =
+                this.user.first_name +
+                "." +
+                this.user.last_name +
+                Math.floor(Math.random() * 99);
+            Registration.dispatch("createAccount", this.user);
+            this.clearForm();
+            this.$bvToast.toast("Account has been created", {
+                title: `New Customer!`,
+                variant: "success",
+                toaster: "b-toaster-top-right",
+                autoHideDelay: 3000
+            });
+        },
+        clearForm() {
+            this.user = {
+                first_name: null,
+                last_name: null,
+                email: null,
+                username: null,
+                phone_no: null,
+                role_id: null
+            };
+        },
+        getRoleList() {
+            axios
+                .get("/api/user-role")
+                .then(response => {
+                    if (response) {
+                        this.role_list = response.data;
+                    }
+                })
+                .catch(error => {
+                    return Promise.reject(error);
+                });
         }
     },
-    mounted()
-    {
-        
+    mounted() {
+        this.getRoleList();
+    },
+    computed: {
+        isCreated() {
+            return Registration.getters.isRegistered;
+        }
     }
-
 };
 </script>
