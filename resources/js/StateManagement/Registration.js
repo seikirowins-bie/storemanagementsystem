@@ -27,6 +27,7 @@ const Registration = new Vuex.Store({
         {
             axios.post('/api/create-account',data)
             .then(res => {
+                console.log(res);
                 if(res.status == 200)
                 {   
                     commit('checkIfCreated',true);

@@ -36,7 +36,7 @@
                 </select>
             </div>
             <div class="form-group text-right">
-                <button class="btn btn-primary">
+                <button @click="createAccount" class="btn btn-primary">
                     <i class="fas fa-user-plus"></i>
                     Create Account
                 </button>
@@ -63,7 +63,7 @@ export default {
     methods: {
         createAccount()
         {
-            this.user.username = this.user.first_name + " " + this.user.last_name + Math.floor(Math.random() * 99);
+            this.user.username = this.user.first_name+"."+this.user.last_name + Math.floor(Math.random() * 99);
             Registration.dispatch('createAccount',this.user);
         }
     },
