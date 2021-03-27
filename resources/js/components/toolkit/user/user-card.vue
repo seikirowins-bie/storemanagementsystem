@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown">
+  <div class="dropdown">
     <i
       class="dropdown-toggle far fa-user-circle"
       href="#"
@@ -15,29 +15,35 @@
       class="dropdown-menu dropdown-menu-right p-3"
       aria-labelledby="navbarDropdown"
     >
-      <h5>Juan Dela Cruz</h5>
-      <p>09077755144</p>
+      <h5>{{ user.first_name + " " + user.last_name }}</h5>
+      <p>{{ user.email }}</p>
       <hr />
 
-     
-
       <a class="dropdown-item">
-           <SignOutButton />
+        <SignOutButton />
       </a>
     </div>
   </div>
 </template>
 <script>
-import SignOutButton from './sign-out';
+import SignOutButton from "./sign-out";
+import User from "../../../StateManagement/User";
 export default {
-    components:{
-        SignOutButton
-    }
-}
+  components: {
+    SignOutButton,
+  },
+  mounted() {
+    User.dispatch("getInformation");
+  },
+  computed: {
+    user() {
+      return User.getters.getData;
+    },
+  },
+};
 </script>
 <style>
-#user-card
-{
-    width: 20em;
+#user-card {
+  width: 20em;
 }
 </style>

@@ -22,15 +22,7 @@ export default {
     navigationBar,
   },
   mounted() {
-    
-      axios.get('api/user')
-    .then(response =>{
-      console.log(response);
-    }).catch(error=>{
-      console.log(error);
-    });
     InterceptHTTPRequest();
-    
   },
   computed: {
     isAuth() {
