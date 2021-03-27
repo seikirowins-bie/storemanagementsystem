@@ -9,7 +9,8 @@ const Auth = new Vuex.Store({
     state: {
         token: localStorage.getItem("authentication-token") || "",
         isLoggedIn: localStorage.getItem("verify-authentication") || "",
-        isValid: true
+        isValid: true,
+        account_role:localStorage.getItem('account-role') || ""
     },
     getters: {
         checkIfValid: state => {
@@ -17,6 +18,9 @@ const Auth = new Vuex.Store({
         },
         isAuthenticated: state => {
             return state.isLoggedIn;
+        },
+        getUserRole: state => {
+            return state.account_role;
         }
     },
     mutations: {
@@ -28,6 +32,9 @@ const Auth = new Vuex.Store({
         },
         setLoggedInStatus: (state, status) => {
             state.isLoggedIn = status;
+        },
+        setUserRole: (state,role)=>{
+            state.account_role = role;
         }
     },
     actions: {
@@ -40,12 +47,18 @@ const Auth = new Vuex.Store({
                         .then(response => {
                             let res = response.data;
 
+                            
+
                             // set data to the local storage
                             localStorage.setItem(
                                 "authentication-token",
                                 res.access_token
                             );
                             localStorage.setItem("verify-authentication", true);
+                            localStorage.setItem(
+                                "account-role",
+                                res.role_id
+                            );
 
                             // get data from local storage
                             commit(
@@ -56,8 +69,9 @@ const Auth = new Vuex.Store({
                                 "setLoggedInStatus",
                                 localStorage.getItem("verify-authentication")
                             );
+                            commit('setUserRole',localStorage.getItem("account-role"));
                             commit("setValidityStatus", true);
-
+                                
                             router.push({
                                 name: "dashboard-page"
                             });

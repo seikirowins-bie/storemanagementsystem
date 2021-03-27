@@ -61,7 +61,8 @@ const router = new VueRouter({
             name:'registration-page',
             component:RegistrationPage,
             meta:{
-                requiresAuth:true
+                requiresAuth:true,
+                adminOnly:true
             }
         }
     ]

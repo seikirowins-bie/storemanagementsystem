@@ -63,7 +63,8 @@ class LoginController extends Controller
             
             'access_token'=>$authenticationToken,
             'token_type'=>'Bearer',
-           
+             'role_id'=>Auth()->user()->role_id,
+             'account_status'=>Auth()->user()->account_status
         ],$status);
 
     }
