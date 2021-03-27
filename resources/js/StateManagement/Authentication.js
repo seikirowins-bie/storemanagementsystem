@@ -40,8 +40,6 @@ const Auth = new Vuex.Store({
                         .then(response => {
                             let res = response.data;
 
-                           
-
                             // set data to the local storage
                             localStorage.setItem(
                                 "authentication-token",
@@ -58,6 +56,7 @@ const Auth = new Vuex.Store({
                                 "setLoggedInStatus",
                                 localStorage.getItem("verify-authentication")
                             );
+                            commit("setValidityStatus", true);
 
                             router.push({
                                 name: "dashboard-page"
@@ -77,32 +76,29 @@ const Auth = new Vuex.Store({
                     return Promise.reject(error);
                 });
         },
-        signOut({ commit,state }) {
-            
-                axios
-                    .post("api/sign-out",{
-                        tokenid:state.token
-                    })
-                    .then(response => {
-                        if (response) {
-                            console.log(response);
-                            if (response.status == 200) {
-                                localStorage.clear();
-                                commit("setToken", null);
+        signOut({ commit, state }) {
+            axios
+                .post("api/sign-out", {
+                    tokenid: state.token
+                })
+                .then(response => {
+                    if (response) {
+                        console.log(response);
+                        if (response.status == 200) {
+                            localStorage.clear();
+                            commit("setToken", null);
 
-                                commit("setLoggedInStatus", false);
+                            commit("setLoggedInStatus", false);
 
-                                router.push({
-                                    name: "login-page"
-                                });
-                            }
+                            router.push({
+                                name: "login-page"
+                            });
                         }
-                    })
-                    .catch(error => {
-                        return Promise.reject(error);
-                    });
-                
-            
+                    }
+                })
+                .catch(error => {
+                    return Promise.reject(error);
+                });
         }
     }
 });

@@ -16,11 +16,22 @@
 import navigationBar from "./layout/navigationBar/navigation-bar";
 
 import Auth from "../StateManagement/Authentication";
+import InterceptHTTPRequest from '../HttpHandling/interceptor';
 export default {
   components: {
     navigationBar,
   },
-  mounted() {},
+  mounted() {
+    
+      axios.get('api/user')
+    .then(response =>{
+      console.log(response);
+    }).catch(error=>{
+      console.log(error);
+    });
+    InterceptHTTPRequest();
+    
+  },
   computed: {
     isAuth() {
       return Auth.getters.isAuthenticated;
