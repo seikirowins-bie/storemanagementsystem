@@ -16,6 +16,9 @@
       </b-navbar-nav>
 
               <b-navbar-nav class="ml-auto">
+                 <b-nav-item href="#">
+                            <RegistrationToolkit />
+                          </b-nav-item>
                           <b-nav-item href="#">
                             <NotificationToolkit />
                           </b-nav-item>
@@ -31,10 +34,12 @@
 <script>
 import NotificationToolkit from '../../toolkit/notification/notification';
 import UserToolki from '../../toolkit/user/user-card';
+import RegistrationToolkit from '../../toolkit/registration/adduser';
 export default {
   components:{
     NotificationToolkit,
-    UserToolki
+    UserToolki,
+    RegistrationToolkit
   }
 };
 </script>

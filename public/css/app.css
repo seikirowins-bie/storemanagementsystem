@@ -17126,6 +17126,10 @@ i {
   border-bottom-right-radius: 200px;
 }
 
+.card {
+  border-width: 0px !important;
+}
+
 .ti {
   cursor: pointer;
 }

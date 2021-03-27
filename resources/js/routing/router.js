@@ -3,6 +3,7 @@ import CreditorPage from './../components/creditor/index'
 import InventoryPage from './../components/inventory/index'
 import LoginPage from './../components/login/index'
 import DashboardPage from './../components/dashboard/index'
+import RegistrationPage from './../components/admin/registration';
 //end of components
 
 //state management
@@ -51,6 +52,14 @@ const router = new VueRouter({
             path:'/inventory',
             name:'inventory-page',
             component:InventoryPage,
+            meta:{
+                requiresAuth:true
+            }
+        },
+        {
+            path:'/registration',
+            name:'registration-page',
+            component:RegistrationPage,
             meta:{
                 requiresAuth:true
             }
