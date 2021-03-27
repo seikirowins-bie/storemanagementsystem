@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>New Account</h2>
+        <h2><i class="fas fa-user-circle"></i> New Account</h2>
         <hr />
         <form>
             <div class="form-group">
@@ -78,9 +78,9 @@ export default {
     methods: {
         createAccount() {
             this.user.username =
-                this.user.first_name +
+                this.user.first_name.toLowerCase() +
                 "." +
-                this.user.last_name +
+                this.user.last_name.toLowerCase() +
                 Math.floor(Math.random() * 99);
             Registration.dispatch("createAccount", this.user);
             this.clearForm();

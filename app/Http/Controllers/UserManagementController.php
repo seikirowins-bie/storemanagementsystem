@@ -17,7 +17,7 @@ class UserManagementController extends Controller
             'username'=>$request['username'],
             'password'=>Hash::make('pass1234'),
             'mobile_no'=>$request['phone_no'],
-            'role_id'=>$request['role_id'] || 1,
+            'role_id'=>$request['role_id'],
             'account_status'=>1
         ]);
 
