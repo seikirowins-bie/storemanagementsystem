@@ -26,4 +26,5 @@ export default {
     float: left;
     height: 100vh;
 }
+
 </style>

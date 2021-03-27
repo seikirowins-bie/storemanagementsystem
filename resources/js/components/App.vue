@@ -1,15 +1,33 @@
 <template>
-   <div class="container mt-3">
-       <div class="row">
-            <router-view></router-view>
-       </div>
-   </div>
+  <div v-bind:class="isAuth ? 'container-fluid' : 'container'" class="mt-5">
+    <div v-if="isAuth" class="row">
+      <div class="col-lg-12">
+        <navigationBar />
+      </div>
+    </div>
+    <div class="row">
+      <router-view></router-view>
+    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
-    }
+// import the layout when authenticated
+import navigationBar from "./layout/navigationBar/navigation-bar";
+
+import Auth from "../StateManagement/Authentication";
+import InterceptHTTPRequest from '../HttpHandling/interceptor';
+export default {
+  components: {
+    navigationBar,
+  },
+  mounted() {
+    InterceptHTTPRequest();
+  },
+  computed: {
+    isAuth() {
+      return Auth.getters.isAuthenticated;
+    },
+  },
+};
 </script>

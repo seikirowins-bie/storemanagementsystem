@@ -1,0 +1,45 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+h1,h2,h3,h4,h5,h6
+{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+}
+
+h1,h2,h3,h4,h5,h6,p,span,i
+{
+    line-height: 130%;
+}
+
+
+/* form elements */
+.input-grey {
+    background-color: #ededed;
+}
+
+.no-edge-input {
+    border-top-right-radius: 200px;
+    border-top-left-radius: 200px;
+    border-bottom-left-radius: 200px;
+    border-bottom-right-radius: 200px;
+}
+
+.card
+{
+    border-width: 0px !important;
+}
+
+
+
+ // toolkit
+ .ti
+ {
+     cursor: pointer;
+ }
+
+ .dropdown-menu
+ {
+     border-width: 0px;
+ }

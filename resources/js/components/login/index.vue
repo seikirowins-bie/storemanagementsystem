@@ -4,7 +4,7 @@
       <div class="col-lg-5">
         <LoginForm />
       </div>
-      <div class="col-lg-7 text-white feature-information">
+      <div class="col-lg-7  feature-information">
         <h3><i class="fas fa-toolbox"></i> Features</h3>
         <hr>
         <ul class="pl-5">
@@ -26,15 +26,7 @@ export default {
 };
 </script>
 <style>
-body {
-  background: #0575e6; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #021b79,
-    #0575e6
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #021b79, #0575e6);
-}
+
 
 .feature-information
 {
