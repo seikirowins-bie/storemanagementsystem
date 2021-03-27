@@ -49,12 +49,16 @@ class LoginController extends Controller
             'password'=>$request['password']
         ];
         $status = null;
+        $role_id = null;
+        $account_status = null;
         $authenticationToken = null;
         if(Auth::attempt($credentials))
         {
             $user = User::where('username',$credentials['username'])->first();
             $authenticationToken = $user->createToken('authToken')->plainTextToken;
             $status = 200;
+            $role_id = Auth()->user()->role_id;
+            $account_status = Auth()->user()->account_status;
         } else {
             $status = 422;
         }
@@ -63,8 +67,8 @@ class LoginController extends Controller
             
             'access_token'=>$authenticationToken,
             'token_type'=>'Bearer',
-             'role_id'=>Auth()->user()->role_id,
-             'account_status'=>Auth()->user()->account_status
+             'role_id'=>$role_id,
+             'account_status'=>$account_status
         ],$status);
 
     }
