@@ -1,0 +1,42 @@
+import axios from "axios";
+import Vue from "vue";
+import Vuex from "vuex";
+Vue.use(Vuex);
+
+
+const Registration = new Vuex.Store({
+    state:{
+        UserInformation:[],
+        isCreated:false
+    },
+    getters:{
+        getUserInformation: state => {
+            return state.UserInformation;
+        }
+    },
+    mutations:{
+        saveInformation: (state,data)=>{
+            state.UserInformation = data;
+        },
+        checkIfCreated: (state,status) => {
+            state.isCreated = status;
+        }
+    },
+    actions:{
+        createAccount({commit},data)
+        {
+            axios.post('/api/create-account',data)
+            .then(res => {
+                if(res.status == 200)
+                {   
+                    commit('checkIfCreated',true);
+                }
+            }).catch(error => {
+                return Promise.reject(error);
+            });
+        }
+    }
+});
+
+
+export default Registration;

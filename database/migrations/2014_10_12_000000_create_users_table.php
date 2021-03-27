@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->nullable();
+            $table->string('mobile_no');
             $table->string('username');
             $table->string('password');
             $table->integer('role_id');
@@ -30,6 +31,7 @@ class CreateUsersTable extends Migration
             'first_name'=>"Rowins",
             'last_name'=>'Bie',
             'email'=>'seikirowins.bie.srb@gmail.com',
+            'mobile_no'=>'09077755144',
             'username'=>'rowins.bie',
             'password'=>Hash::make('pass1234'),
             'role_id'=>1,

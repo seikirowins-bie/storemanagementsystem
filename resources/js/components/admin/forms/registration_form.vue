@@ -1,10 +1,11 @@
 <template>
     <div>
         <h2>New Account</h2>
-        <hr>
+        <hr />
         <form>
             <div class="form-group">
                 <input
+                    v-model="user.first_name"
                     type="text"
                     class="form-control"
                     placeholder="First Name"
@@ -12,30 +13,64 @@
             </div>
             <div class="form-group">
                 <input
+                    v-model="user.last_name"
                     type="text"
                     class="form-control"
                     placeholder="Last Name"
                 />
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="email" />
+                <input type="text" v-model="user.email" class="form-control" placeholder="email" />
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Phone No." />
+                <input
+                    v-model="user.phone_no"
+                    type="text"
+                    class="form-control"
+                    placeholder="Phone No."
+                />
             </div>
             <div class="form-group">
-                <select class="form-control">
+                <select v-model="user.role_id" class="form-control">
                     <option value="">Select Role</option>
                 </select>
             </div>
             <div class="form-group text-right">
                 <button class="btn btn-primary">
                     <i class="fas fa-user-plus"></i>
-                    Create Account</button>
+                    Create Account
+                </button>
             </div>
         </form>
     </div>
 </template>
 <script>
-export default {};
+import Registration from '../../../StateManagement/Registration';
+export default {
+    data() {
+        return {
+            user: {
+                first_name: null,
+                last_name: null,
+                email: null,
+                username:null,
+                phone_no: null,
+                role_id: null
+            },
+            role_list: []
+        };
+    },
+    methods: {
+        createAccount()
+        {
+            this.user.username = this.user.first_name + " " + this.user.last_name + Math.floor(Math.random() * 99);
+            Registration.dispatch('createAccount',this.user);
+        }
+    },
+    mounted()
+    {
+        
+    }
+
+};
 </script>
